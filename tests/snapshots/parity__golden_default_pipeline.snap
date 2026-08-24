@@ -1,0 +1,13 @@
+---
+source: tests/parity.rs
+expression: p.markdown
+---
+Intro
+
+# Getting Started
+
+Install with `npm i thing`.
+
+| Flag | Meaning |
+| ---- | ------- |
+| -o   | output  |

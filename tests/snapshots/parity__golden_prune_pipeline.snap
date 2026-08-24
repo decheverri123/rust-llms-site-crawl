@@ -1,0 +1,9 @@
+---
+source: tests/parity.rs
+expression: "pipeline(&raw(DOCUSAURUS), &o).unwrap().markdown"
+---
+Install with `npm i thing`.
+
+| Flag | Meaning |
+| ---- | ------- |
+| -o   | output  |

@@ -1,0 +1,28 @@
+---
+source: tests/parity.rs
+expression: "pipeline(&raw(DOCUSAURUS), &o).unwrap().markdown"
+---
+Intro
+
+Docs[1]Blog[2]
+
+A[3]
+
+# Getting Started
+
+Install with `npm i thing`.
+
+| Flag | Meaning |
+| ---- | ------- |
+| -o   | output  |
+
+© 2026
+
+enable js
+
+
+## References
+
+[1]: https://example.com/docs
+[2]: https://example.com/blog
+[3]: https://example.com/docs/a

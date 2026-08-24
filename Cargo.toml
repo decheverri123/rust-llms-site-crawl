@@ -1,0 +1,55 @@
+[package]
+name = "wcl"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.82"
+description = "Zero-config CLI that turns any website into LLM-ready markdown"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/decheverri123/web-crawler-llm"
+homepage = "https://github.com/decheverri123/web-crawler-llm"
+keywords = ["web", "crawler", "markdown", "llm", "cli"]
+categories = ["command-line-utilities", "web-programming", "text-processing"]
+exclude = ["docs/", "scripts/", "tests/fixtures/"]
+
+[features]
+default = []
+browser = ["dep:chromiumoxide"]
+
+[dependencies]
+anyhow = "1"
+thiserror = "2"
+clap = { version = "4", features = ["derive"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "sync", "fs"] }
+futures = "0.3"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "gzip", "brotli", "http2", "charset", "stream"] }
+url = "2"
+encoding_rs = "0.8"
+lol_html = "3"
+htmd = "0.5"
+dom_smoothie = "0.18"
+scraper = "0.27"
+quick-xml = "0.42"
+texting_robots = "0.2"
+bm25 = "2"
+indicatif = "0.18"
+flate2 = "1"
+chromiumoxide = { version = "0.9", default-features = false, features = ["rustls", "zip8"], optional = true }
+ratatui = "0.29"
+crossterm = { version = "0.28", features = ["event-stream"] }
+serde_json = "1"
+arboard = { version = "3.4", default-features = false }
+
+[dev-dependencies]
+insta = "1"
+wiremock = "0.6"
+assert_cmd = "2"
+tempfile = "3"
+ratatui = "0.29"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+strip = true
+panic = "abort"
