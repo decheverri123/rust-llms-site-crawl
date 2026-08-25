@@ -1,10 +1,15 @@
 name: Release
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (e.g. v0.1.0 - defaults to version in Cargo.toml)"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -12,8 +17,28 @@ permissions:
 jobs:
   create-release:
     runs-on: ubuntu-latest
+    outputs:
+      ref: ${{ steps.release-tag.outputs.ref }}
     steps:
+      - uses: actions/checkout@v4
+      - id: release-tag
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.tag }}"
+            if [ -z "$TAG" ]; then
+              TAG="v$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -n 1)"
+            fi
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git tag "$TAG" 2>/dev/null || true
+            git push origin "$TAG" 2>/dev/null || true
+            echo "ref=refs/tags/$TAG" >> $GITHUB_OUTPUT
+          else
+            echo "ref=${{ github.ref }}" >> $GITHUB_OUTPUT
+          fi
       - uses: taiki-e/create-gh-release-action@v1
+        with:
+          ref: ${{ steps.release-tag.outputs.ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -40,4 +65,5 @@ jobs:
           target: ${{ matrix.target }}
           archive: $bin-$target
           checksum: sha256
+          ref: ${{ needs.create-release.outputs.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
