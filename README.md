@@ -1,6 +1,6 @@
-# web-crawler-llm (`wcl`)
+# rust-llms-site-crawl (`wcl`)
 
-[![CI](https://github.com/decheverri123/web-crawler-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/decheverri123/web-crawler-llm/actions/workflows/ci.yml)
+[![CI](https://github.com/decheverri123/rust-llms-site-crawl/actions/workflows/ci.yml/badge.svg)](https://github.com/decheverri123/rust-llms-site-crawl/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A zero-config, single-binary CLI that turns **any website into LLM-ready markdown** with a single command. Built in Rust with a fast HTTP-first engine and optional headless Chromium fallback.
@@ -33,7 +33,7 @@ Raw web HTML is noisy: navigation bars, cookie banners, footers, scripts. Feedin
 Downloads the latest prebuilt binary for your platform (Linux/macOS, x86_64/arm64) into `~/.local/bin`:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/decheverri123/web-crawler-llm/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/decheverri123/rust-llms-site-crawl/main/install.sh | sh
 ```
 
 Set `WCL_INSTALL_DIR` to install somewhere other than `~/.local/bin`. No prebuilt binary for your platform? Fall back to one of the Cargo-based methods below.
@@ -93,7 +93,7 @@ Install the binary onto your system so you can run `wcl` from any directory:
 cargo install --path .
 
 # Or install directly from GitHub
-cargo install --git https://github.com/decheverri123/web-crawler-llm
+cargo install --git https://github.com/decheverri123/rust-llms-site-crawl
 
 # Run from anywhere!
 wcl https://news.ycombinator.com

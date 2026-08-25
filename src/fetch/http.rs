@@ -9,7 +9,7 @@ use url::Url;
 pub const USER_AGENT: &str = concat!(
     "wcl/",
     env!("CARGO_PKG_VERSION"),
-    " (+https://github.com/decheverri123/web-crawler-llm)"
+    " (+https://github.com/decheverri123/rust-llms-site-crawl)"
 );
 const MAX_RETRIES: u32 = 3;
 /// Cap on decompressed body size. Gzip/brotli are decoded transparently by

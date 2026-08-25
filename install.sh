@@ -1,9 +1,9 @@
 #!/bin/sh
 # Install wcl from the latest GitHub release.
-#   curl -fsSL https://raw.githubusercontent.com/decheverri123/web-crawler-llm/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/decheverri123/rust-llms-site-crawl/main/install.sh | sh
 set -eu
 
-REPO="decheverri123/web-crawler-llm"
+REPO="decheverri123/rust-llms-site-crawl"
 BIN="wcl"
 
 os=$(uname -s)
