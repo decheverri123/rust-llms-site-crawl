@@ -29,6 +29,7 @@ esac
 
 target="${arch_id}-${os_id}"
 archive="${BIN}-${target}.tar.gz"
+checksum="${BIN}-${target}.sha256"
 base_url="https://github.com/${REPO}/releases/latest/download"
 
 install_dir="${WCL_INSTALL_DIR:-$HOME/.local/bin}"
@@ -39,12 +40,12 @@ trap 'rm -rf "$tmpdir"' EXIT INT TERM
 
 echo "Downloading ${base_url}/${archive}" >&2
 curl -fsSL "${base_url}/${archive}" -o "$tmpdir/$archive"
-curl -fsSL "${base_url}/${archive}.sha256" -o "$tmpdir/${archive}.sha256"
+curl -fsSL "${base_url}/${checksum}" -o "$tmpdir/$checksum"
 
 if command -v sha256sum >/dev/null 2>&1; then
-  (cd "$tmpdir" && sha256sum -c "${archive}.sha256")
+  (cd "$tmpdir" && sha256sum -c "$checksum")
 else
-  (cd "$tmpdir" && shasum -a 256 -c "${archive}.sha256")
+  (cd "$tmpdir" && shasum -a 256 -c "$checksum")
 fi
 
 tar -xzf "$tmpdir/$archive" -C "$tmpdir"
